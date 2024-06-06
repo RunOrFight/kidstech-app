@@ -1,0 +1,29 @@
+.tagsList {
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 12px;
+    list-style: none;
+    flex: 0 0 264px;
+    height: fit-content;
+}
+
+.tag {
+    padding: 12px;
+    border-radius: 12px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 18px;
+    letter-spacing: -0.1px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.tag.active {
+    background-color: var(--selected-bg);
+    color: var(--selected-text);
+}
+
+.tag:hover:not(.active) {
+    background-color: var(--hover-bg);
+}
