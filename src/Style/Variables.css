@@ -4,5 +4,6 @@
     --selected-bg: #5FBF77;
     --card-shadow: 0px 10px 13px -4px #23235F30;
     --border-color: #CFCFE4;
-    --hover-bg: #0000000f
+    --hover-bg: #0000000f;
+    --error: #FF9AB4
 }

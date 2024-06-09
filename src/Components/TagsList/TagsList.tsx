@@ -1,25 +1,61 @@
-import {FC, useState} from "react";
+import {CSSProperties, Dispatch, FC, memo, SetStateAction} from "react";
 import classes from "./TagsList.module.css"
+import {ALL_TAG} from "../../Constants/AllTag.ts";
+import {SkeletonLine} from "../SkeletonLine/SkeletonLine.tsx";
+import {range} from "../../Utils/Range.ts";
 
-interface ITagsListProps {
-    tags: string[]
+interface ITagProps {
+    tag: string
+    isActive: boolean
+    setActiveTag: Dispatch<SetStateAction<string>>
 }
 
-const TagsList: FC<ITagsListProps> = ({tags}) => {
-    const [activeTag, setActiveTag] = useState(tags[0])
+const Tag = memo<ITagProps>(({tag, isActive, setActiveTag}) => {
+    const className = `${classes.tag} ${classes.clickable}` + (isActive ? ` ${classes.active}` : "")
+
+    const onClick = () => {
+        setActiveTag(tag)
+    }
+
+    return <li className={className} onClick={onClick}>{tag}</li>
+})
+
+const SkeletonTag: FC<Pick<CSSProperties, "width">> = ({width}) => {
+
+    return <li className={classes.tag}>
+        <SkeletonLine width={width} height={"18px"}/>
+    </li>
+}
+
+type TTagsListProps =
+    {
+        tags: string[]
+        activeTag: string
+        setActiveTag: Dispatch<SetStateAction<string>>
+        skeleton?: false
+    } |
+    {
+        tags?: never
+        activeTag?: never
+        setActiveTag?: never
+        skeleton: true
+    }
+
+const getRandomWidth = () => Math.max((Math.random() * 100), 50) + "%"
+
+const TagsList: FC<TTagsListProps> = (props) => {
+    if (props.skeleton) {
+        return <ul className={classes.tagsList}>
+            {range(7).map(() => <SkeletonTag width={getRandomWidth()}/>)}
+        </ul>
+    }
+
+    const {activeTag, tags, setActiveTag} = props
 
     return <ul className={classes.tagsList}>
-        {tags.map((tag, i) => {
-            const className = classes.tag + (activeTag === tag ? ` ${classes.active}` : "")
+        <Tag tag={ALL_TAG} setActiveTag={setActiveTag} isActive={activeTag === ALL_TAG}/>
 
-            const onClick = () => {
-                setActiveTag(tag)
-            }
-
-            const tabIndex = i + 1
-
-            return <li tabIndex={tabIndex} key={tag} className={className} onClick={onClick}>{tag}</li>
-        })}
+        {tags.map((tag) => <Tag key={tag} tag={tag} setActiveTag={setActiveTag} isActive={activeTag === tag}/>)}
     </ul>
 }
 TagsList.displayName = "TagsList"

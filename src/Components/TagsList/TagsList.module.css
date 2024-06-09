@@ -5,6 +5,9 @@
     list-style: none;
     flex: 0 0 264px;
     height: fit-content;
+    position: sticky;
+    top: 24px;
+    left: 24px;
 }
 
 .tag {
@@ -16,14 +19,17 @@
     line-height: 18px;
     letter-spacing: -0.1px;
     text-align: left;
+}
+
+.tag.clickable {
     cursor: pointer;
 }
 
-.tag.active {
+.tag.clickable.active {
     background-color: var(--selected-bg);
     color: var(--selected-text);
 }
 
-.tag:hover:not(.active) {
+.tag.clickable:hover:not(.active) {
     background-color: var(--hover-bg);
 }

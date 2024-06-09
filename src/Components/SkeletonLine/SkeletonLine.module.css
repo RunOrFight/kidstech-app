@@ -1,0 +1,19 @@
+.skeletonLine {
+    width: 100%;
+    height: 100%;
+    animation: pulse 2s ease-in-out 0.5s infinite;
+    background-color: var(--hover-bg);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
