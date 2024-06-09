@@ -8,6 +8,7 @@
     position: sticky;
     top: 24px;
     left: 24px;
+    overflow: hidden;
 }
 
 .tag {
@@ -23,6 +24,7 @@
 
 .tag.clickable {
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .tag.clickable.active {
@@ -32,4 +34,12 @@
 
 .tag.clickable:hover:not(.active) {
     background-color: var(--hover-bg);
+}
+
+
+@media screen and (max-width: 600px) {
+    .tagsList {
+        position: static;
+        flex: 1 1 auto;
+    }
 }

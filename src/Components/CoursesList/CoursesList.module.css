@@ -37,3 +37,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+@media screen and (max-width: 900px) {
+    .coursesList {
+        display: flex;
+        flex-direction: column;
+    }
+}
