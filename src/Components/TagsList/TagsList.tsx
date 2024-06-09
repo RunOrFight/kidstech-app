@@ -46,7 +46,7 @@ const getRandomWidth = () => Math.max((Math.random() * 100), 50) + "%"
 const TagsList: FC<TTagsListProps> = (props) => {
     if (props.skeleton) {
         return <ul className={classes.tagsList}>
-            {range(7).map(() => <SkeletonTag width={getRandomWidth()}/>)}
+            {range(7).map((_, i) => <SkeletonTag key={i} width={getRandomWidth()}/>)}
         </ul>
     }
 
